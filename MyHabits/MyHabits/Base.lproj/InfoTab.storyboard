@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="5e6-NP-ueZ">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Информация-->
+        <scene sceneID="Agz-zr-L4F">
+            <objects>
+                <viewController id="5v2-m2-2iu" customClass="InfoViewController" customModule="MyHabits" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" autoresizesSubviews="NO" contentMode="scaleToFill" id="tyA-x0-kkf">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Привычка за 21 день" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lKa-ek-RiA">
+                                <rect key="frame" x="16" y="110" width="382" height="24"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bHM-7v-h5j">
+                                <rect key="frame" x="16" y="150" width="382" height="647"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <string key="text">Прохождение этапов, за которые за 21 день вырабатывается привычка, подчиняется следующему алгоритму:  1. Провести 1 день без обращения к старым привычкам, стараться вести себя так, как будто цель, загаданная на перспективу, находится на расстоянии шага.  2. Выдержать 2 дня в прежнем состоянии самоконтроля.  3. Отметить в дневнике первую неделю изменений и подвести первые итоги — что оказалось тяжело, что — легче, с чем еще предстоит серьёзно бороться.  4. Поздравить себя с прохождением первого серьёзного порога в 21 день. За это время отказ от дурных наклонностей уже примет форму осознанного преодоления и человек сможет больше работать в сторону принятия положительных качеств.  5. Держать планку 40 дней. Практикующий методику уже чувствует себя освободившимся от прошлого негатива и двигается в нужном направлении с хорошей динамикой.  6. На 90 день соблюдения техники всё лишнее из «прошлой жизни» перестаёт напоминать о себе, и человек, оглянувшись назад, осознаёт себя полностью обновившимся.  Источник: psychbook.ru</string>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ub0-3h-IO5"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="lKa-ek-RiA" firstAttribute="top" secondItem="ub0-3h-IO5" secondAttribute="top" constant="22" id="2Z5-Ye-h92"/>
+                            <constraint firstItem="lKa-ek-RiA" firstAttribute="leading" secondItem="ub0-3h-IO5" secondAttribute="leading" constant="16" id="4rI-Bf-87M"/>
+                            <constraint firstItem="ub0-3h-IO5" firstAttribute="trailing" secondItem="lKa-ek-RiA" secondAttribute="trailing" constant="16" id="MPz-FI-dHm"/>
+                            <constraint firstItem="ub0-3h-IO5" firstAttribute="bottom" secondItem="bHM-7v-h5j" secondAttribute="bottom" constant="16" id="iLL-sW-gnY"/>
+                            <constraint firstItem="bHM-7v-h5j" firstAttribute="leading" secondItem="ub0-3h-IO5" secondAttribute="leading" constant="16" id="k7d-Si-AL0"/>
+                            <constraint firstItem="bHM-7v-h5j" firstAttribute="top" secondItem="lKa-ek-RiA" secondAttribute="bottom" constant="16" id="xib-fu-2Gr"/>
+                            <constraint firstItem="ub0-3h-IO5" firstAttribute="trailing" secondItem="bHM-7v-h5j" secondAttribute="trailing" constant="16" id="zgY-OU-RF4"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Информация" id="jgA-Ul-1lf"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zJh-M7-qNQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1478" y="-23"/>
+        </scene>
+        <!--Информация-->
+        <scene sceneID="F9e-JT-sxS">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5e6-NP-ueZ" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Информация" image="info.circle.fill" catalog="system" selectedImage="info.circle.fill" id="ngF-ki-fHB"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="UuV-gt-D4d">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="5v2-m2-2iu" kind="relationship" relationship="rootViewController" id="GKL-9S-qLF"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BZU-wu-A3b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="625" y="-22"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="info.circle.fill" catalog="system" width="128" height="121"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
