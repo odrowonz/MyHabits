@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="b1L-N8-TbI">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Выпить стакан воды-->
+        <scene sceneID="hXJ-pO-X5i">
+            <objects>
+                <tableViewController id="b1L-N8-TbI" customClass="HabitDetailsViewController" customModule="MyHabits" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="8a9-fj-uwk">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <prototypes>
+                            <tableViewCell autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="HabitCell" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="HabitDetailsTableViewCell" rowHeight="44" id="Tsn-rc-kbV" customClass="HabitDetailsTableViewCell" customModule="MyHabits" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="55.5" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" autoresizesSubviews="NO" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Tsn-rc-kbV" id="IU0-Ke-GDy">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Вчера" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mag-NN-P9w">
+                                            <rect key="frame" x="12" y="11.5" width="49" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="mag-NN-P9w" firstAttribute="centerY" secondItem="IU0-Ke-GDy" secondAttribute="centerY" id="SmM-pw-4Tl"/>
+                                        <constraint firstItem="mag-NN-P9w" firstAttribute="leading" secondItem="IU0-Ke-GDy" secondAttribute="leading" constant="12" id="rF5-8g-t1d"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="tintColor" name="Color_161_22_204"/>
+                                <connections>
+                                    <outlet property="dateLabel" destination="mag-NN-P9w" id="gJR-vU-G9c"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="b1L-N8-TbI" id="0Re-Yo-h3O"/>
+                            <outlet property="delegate" destination="b1L-N8-TbI" id="xJ6-Cu-r9d"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Выпить стакан воды" leftItemsSupplementBackButton="YES" largeTitleDisplayMode="never" id="BNf-D1-kaH">
+                        <barButtonItem key="rightBarButtonItem" id="jO7-Gk-C9b">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="v9n-VF-Vdh">
+                                <rect key="frame" x="302" y="7" width="92" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Править">
+                                    <color key="titleColor" name="Color_161_22_204"/>
+                                </state>
+                                <connections>
+                                    <segue destination="SEt-U0-Yr8" kind="presentation" identifier="editHabitButtonPressed" id="JD1-uu-4wI"/>
+                                </connections>
+                            </button>
+                            <color key="tintColor" name="Color_161_22_204"/>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qWx-sh-GCN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1248" y="-704"/>
+        </scene>
+        <!--UIViewController-j5I-Cj-VUZ-->
+        <scene sceneID="Bd7-SQ-w3v">
+            <objects>
+                <viewControllerPlaceholder storyboardName="HabitsTab" referencedIdentifier="UIViewController-j5I-Cj-VUZ" id="SEt-U0-Yr8" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UDR-Ic-MKr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1917" y="-704"/>
+        </scene>
+    </scenes>
+    <resources>
+        <namedColor name="Color_161_22_204">
+            <color red="0.63137254901960782" green="0.086274509803921567" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

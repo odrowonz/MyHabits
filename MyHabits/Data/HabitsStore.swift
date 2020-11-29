@@ -3,6 +3,7 @@
 //  MyHabits
 //
 //  Created by Andrey Antipov on 04.11.2020.
+//  Copyright © 2020 Andrey Antipov. All rights reserved.
 //
 import UIKit
 
@@ -57,6 +58,7 @@ public final class Habit: Codable {
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.timeStyle = .short
+        formatter.dateFormat = "HH:mm"
         return formatter
     }()
     
@@ -140,6 +142,17 @@ public final class HabitsStore {
     
     // MARK: - Lifecycle
     
+    /// Сохраняет все изменения в привычках в UserDefaults.
+    public func save() {
+        do {
+            let data = try encoder.encode(habits)
+            userDefaults.setValue(data, forKey: "habits")
+        }
+        catch {
+            print("Ошибка кодирования привычек для сохранения", error)
+        }
+    }
+    
     /// Добавляет текущую дату в trackDates для переданной привычки.
     /// - Parameter habit: Привычка, в которую добавится новая дата.
     public func track(_ habit: Habit) {
@@ -187,16 +200,6 @@ public final class HabitsStore {
         }
         catch {
             print("Ошибка декодирования сохранённых привычек", error)
-        }
-    }
-    
-    private func save() {
-        do {
-            let data = try encoder.encode(habits)
-            userDefaults.setValue(data, forKey: "habits")
-        }
-        catch {
-            print("Ошибка кодирования привычек для сохранения", error)
         }
     }
 }
