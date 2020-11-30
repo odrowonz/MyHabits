@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "ProgressCollectionViewCell.percentsShow():ProgressCollectionViewCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "percents">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in HabitViewController.deleteHabitButtonTap(_:):HabitViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.parent">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "HabitsViewController.prepare(for:sender:):HabitsViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "HabitsViewController.collectionView(_:cellForItemAt:):HabitsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "HabitsStore.shared.todayProgress">
+            </PersistentString>
+            <PersistentString
+               value = "HabitsStore">
+            </PersistentString>
+            <PersistentString
+               value = "HabitsStore.shared.habits">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__pthread_kill:(null)">
+      </ContextState>
+      <ContextState
+         contextName = "HabitViewController.closeButton(_:):HabitViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.navigationController">
+            </PersistentString>
+            <PersistentString
+               value = "navController">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SceneDelegate.scene(_:willConnectTo:options:):SceneDelegate.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "window?.overrideUserInterfaceStyle">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "HabitDetailsViewController.prepare(for:sender:):HabitDetailsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.navigationController">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "HabitDetailsViewController.tableView(_:cellForRowAt:):HabitDetailsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "cell.date">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "HabitViewController.viewDidAppear(_:):HabitViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.navigationBar!">
+            </PersistentString>
+            <PersistentString
+               value = "self.title">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "HabitDetailsTableViewCell.date.didset:HabitDetailsTableViewCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "lvalue.dateToString()">
+            </PersistentString>
+            <PersistentString
+               value = "value.dateToString()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

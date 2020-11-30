@@ -34,7 +34,8 @@ class HabitDetailsViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! HabitDetailsTableViewCell
         let maxI = HabitsStore.shared.dates.count - 1
-        cell.dateLabel.text = HabitsStore.shared.dates[maxI-indexPath.row].dateToString()
+        cell.dateLabel.text = HabitsStore.shared.trackDateString(forIndex: maxI-indexPath.row)
+        //cell.dateLabel.text = HabitsStore.shared.dates[maxI-indexPath.row].dateToString()
         cell.accessoryType = HabitsStore.shared.habit(habit!, isTrackedIn: HabitsStore.shared.dates[indexPath.row]) ? .checkmark : .none
         return cell
     }

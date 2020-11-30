@@ -135,6 +135,8 @@ public final class HabitsStore {
         formatter.dateStyle = .medium
         formatter.timeStyle = .none
         formatter.doesRelativeDateFormatting = true
+        formatter.locale = Locale(identifier: "ru")
+        //formatter.dateFormat = "dd MMMM yyyy"
         return formatter
     }()
     
