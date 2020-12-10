@@ -14,7 +14,7 @@ final class HabitViewController: UIViewController {
     @IBOutlet private var navigItem: UINavigationItem?
     @IBOutlet private var scrollView: UIScrollView?
     @IBOutlet private var contentView: UIView?
-    @IBOutlet private var nameTextField: UITextField?
+    @IBOutlet private var nameTextField: UITextField!
     @IBOutlet private var colorView: UIView?
     @IBOutlet private var timeLabel: UILabel?
     @IBOutlet private var timeDatePicker: UIDatePicker?
@@ -32,45 +32,11 @@ final class HabitViewController: UIViewController {
     let currentTime: Date = Date()
 
     // Текущий режим работы с привычкой (создание или редактирование)
-    var state: State? /*{
-        didSet {
-            // Начальные настройки в зависимости от режима
-            switch state {
-            case .create:
-                // В режиме создания написать заголовок Создать и спрятать кнопку удаления привычки
-                navigItem?.title = "Создать"
-                deleteHabitButton?.isEnabled = false
-                deleteHabitButton?.alpha = 0
-            default:
-                // В режиме редактирования написать заголовок Править и показать кнопку удаления привычки
-                navigItem?.title = "Править"
-                deleteHabitButton?.alpha = 1
-                deleteHabitButton?.isEnabled = true
-            }
-        }
-    }*/
+    var state: State?
+    // Привычка лежащая в основе этого вида
+    var habit : Habit?
     
-    var habit : Habit? /*{
-        didSet {
-            // Обновить визуальные элементы в соответствии с привычкой
-            if let value = habit {
-                // Привычка задана
-                nameTextField?.text = value.name
-                colorView?.backgroundColor = value.color
-                timeDatePicker?.date = value.date
-            } else {
-                // Привычка не задана - взять значения по-умолчанию
-                nameTextField?.text = defaultName
-                colorView?.backgroundColor = defaultHabitColor
-                timeDatePicker?.date = Date()
-            }
-            
-            // Обновить текст времени
-            timeLabelRefresh()
-        }
-    }*/
-    
-    var colView: UICollectionView? = nil
+    //var colView: UICollectionView? = nil
     var navController: UINavigationController? = nil
     
     
@@ -85,23 +51,25 @@ final class HabitViewController: UIViewController {
         } else {
             nameTextField?.text = defaultName
             colorView?.backgroundColor = defaultColor
-            timeDatePicker?.date = currentTime
+            timeDatePicker?.date = Date()
         }
         // Обновить текст времени
-        timeLabel?.setColorForPart(wholeText: timeDatePicker?.date.timeToHabitString(), coloredPartText: timeDatePicker?.date.timeToString(), colorOfPart: defaultColor)
+        timeLabelRefresh()
         
         // Начальные настройки в зависимости от режима
-        switch state {
-        case .create:
-            // В режиме создания написать заголовок Создать и спрятать кнопку удаления привычки
-            navigItem?.title = "Создать"
-            deleteHabitButton?.isEnabled = false
-            deleteHabitButton?.alpha = 0
-        default:
-            // В режиме редактирования написать заголовок Править и показать кнопку удаления привычки
-            navigItem?.title = "Править"
-            deleteHabitButton?.alpha = 1
-            deleteHabitButton?.isEnabled = true
+        if let state = state {
+            switch state {
+            case .create:
+                // В режиме создания написать заголовок Создать и спрятать кнопку удаления привычки
+                navigItem?.title = "Создать"
+                deleteHabitButton?.isEnabled = false
+                deleteHabitButton?.alpha = 0
+            case .edit:
+                // В режиме редактирования написать заголовок Править и показать кнопку удаления привычки
+                navigItem?.title = "Править"
+                deleteHabitButton?.alpha = 1
+                deleteHabitButton?.isEnabled = true
+            }
         }
 
         // Keyboard observers
@@ -128,6 +96,9 @@ final class HabitViewController: UIViewController {
     
     // Обработчик нажатия Отменить
     @IBAction func closeButton(_ sender: UIBarButtonItem) {
+        // Закрыть родительское окно
+        navController?.popToRootViewController(animated: true)
+        // Закрыть текущее окно
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -149,9 +120,14 @@ final class HabitViewController: UIViewController {
             // Удалить привычку
             HabitsStore.shared.habits.remove(at: index)
             // Перезагрузить коллекцию привычек
-            colView!.reloadData()
+            if let vc = navController?.viewControllers[0] as? HabitsViewController {
+                // Перезагрузить коллекцию привычек
+                vc.isUpdateNeeded = true
+            }
+            // Перезагрузить коллекцию привычек
+            //colView!.reloadData()
             // Закрыть родительское окно
-            navController!.popViewController(animated: true)
+            navController?.popToRootViewController(animated: true)
             // Закрыть текущее окно
             self.dismiss(animated: true, completion: nil)
         }
@@ -196,13 +172,19 @@ final class HabitViewController: UIViewController {
             habit.date = date
             habit.color = color
             HabitsStore.shared.save()
-            
-            // Закрыть родительское окно
-            navController!.popViewController(animated: true)
         }
         
         // Перезагрузить коллекцию привычек
-        colView?.reloadData()
+        if let vc = navController?.viewControllers[0] as? HabitsViewController {
+            // Перезагрузить коллекцию привычек
+            vc.isUpdateNeeded = true
+        }
+        
+        // Перезагрузить коллекцию привычек
+        //colView?.reloadData()
+        
+        // Закрыть родительское окно
+        navController?.popToRootViewController(animated: true)
         
         // Закрыть текущее окно
         self.dismiss(animated: true, completion: nil)

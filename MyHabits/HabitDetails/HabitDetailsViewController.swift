@@ -13,7 +13,7 @@ final class HabitDetailsViewController: UITableViewController {
     /// Привычка
     var habit: Habit?
     
-    var colView: UICollectionView? = nil
+    //var colView: UICollectionView? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,8 +57,8 @@ final class HabitDetailsViewController: UITableViewController {
             if let controller = segue.destination as? HabitViewController {
                 controller.state = .edit
                 controller.habit = habit
-                controller.colView = colView
-                controller.navController = self.navigationController
+                //controller.colView = colView
+                controller.navController = navigationController
             }
         }
     }

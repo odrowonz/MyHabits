@@ -10,6 +10,8 @@ import UIKit
 
 final class HabitsViewController: UICollectionViewController {
     private var progressCell: ProgressCollectionViewCell?
+    
+    var isUpdateNeeded: Bool = false { didSet { collectionView.reloadData() } }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,14 +35,15 @@ final class HabitsViewController: UICollectionViewController {
         if segue.identifier == "createHabitButtonPressed" {
             if let controller = segue.destination as? HabitViewController {
                 controller.state = .create
-                controller.colView = collectionView
+                controller.navController = navigationController
+                //controller.colView = collectionView
             }
         }
         else if segue.identifier == "showDates" {
             if let controller = segue.destination as? HabitDetailsViewController,
                let sender = sender as? HabitCollectionViewCell {
                 controller.habit = sender.habit
-                controller.colView = collectionView
+                //controller.colView = collectionView
             }
         }
     }

@@ -3,23 +3,39 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "ProgressCollectionViewCell.percentsShow():ProgressCollectionViewCell.swift">
+         contextName = "HabitDetailsViewController.tableView(_:cellForRowAt:):HabitDetailsViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "percents">
+               value = "cell.date">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in HabitViewController.deleteHabitButtonTap(_:):HabitViewController.swift">
+         contextName = "HabitViewController.saveButton(_:):HabitViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.parent">
+               value = "navController?.viewControllers">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "HabitsViewController.prepare(for:sender:):HabitsViewController.swift">
+         contextName = "HabitDetailsViewController.prepare(for:sender:):HabitDetailsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.navigationController">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "HabitDetailsTableViewCell.date.didset:HabitDetailsTableViewCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "lvalue.dateToString()">
+            </PersistentString>
+            <PersistentString
+               value = "value.dateToString()">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "HabitsViewController.collectionView(_:cellForItemAt:):HabitsViewController.swift">
@@ -39,13 +55,13 @@
          contextName = "__pthread_kill:(null)">
       </ContextState>
       <ContextState
-         contextName = "HabitViewController.closeButton(_:):HabitViewController.swift">
+         contextName = "closure #1 in HabitsStore.dateFormatter.getter:HabitsStore.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in HabitViewController.deleteHabitButtonTap(_:):HabitViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.navigationController">
-            </PersistentString>
-            <PersistentString
-               value = "navController">
+               value = "self.parent">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -58,18 +74,16 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "HabitDetailsViewController.prepare(for:sender:):HabitDetailsViewController.swift">
+         contextName = "HabitsViewController.prepare(for:sender:):HabitsViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "HabitViewController.closeButton(_:):HabitViewController.swift">
          <PersistentStrings>
             <PersistentString
                value = "self.navigationController">
             </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "HabitDetailsViewController.tableView(_:cellForRowAt:):HabitDetailsViewController.swift">
-         <PersistentStrings>
             <PersistentString
-               value = "cell.date">
+               value = "navController">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -77,21 +91,18 @@
          contextName = "HabitViewController.viewDidAppear(_:):HabitViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.navigationBar!">
+               value = "self.title">
             </PersistentString>
             <PersistentString
-               value = "self.title">
+               value = "self.navigationBar!">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "HabitDetailsTableViewCell.date.didset:HabitDetailsTableViewCell.swift">
+         contextName = "ProgressCollectionViewCell.percentsShow():ProgressCollectionViewCell.swift">
          <PersistentStrings>
             <PersistentString
-               value = "lvalue.dateToString()">
-            </PersistentString>
-            <PersistentString
-               value = "value.dateToString()">
+               value = "percents">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
