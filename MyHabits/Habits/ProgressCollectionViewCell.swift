@@ -8,23 +8,35 @@
 
 import UIKit
 
-class ProgressCollectionViewCell: UICollectionViewCell {
-    @IBOutlet weak var progressView: UIProgressView!
-    @IBOutlet weak var progressLabel: UILabel!
+final class ProgressCollectionViewCell: UICollectionViewCell {
+    // Связь с элементами вида
+    @IBOutlet private var progressView: UIProgressView?
+    @IBOutlet private var progressLabel: UILabel?
+    
+    /// Идентификатор ячейки
+    static let id = "progressCollectionViewCell"
     
     /// Доля выполненных привычек (от 0 до 1)
-    public var percents: Float = HabitsStore.shared.todayProgress {
+    var percents: Float = HabitsStore.shared.todayProgress {
         didSet(value) {
-            percentsShow()
+            layoutRefresh()
         }
     }
     
-    private func percentsShow() {
+    /// Метод обновления ячейки
+    private func layoutRefresh() {
+        // Защита тела метода
+        // Вид прогресса задан?
+        guard let progressView = progressView else { return }
+        // Надпись процентов задана?
+        guard let progressLabel = progressLabel else { return }
+        
         progressView.progress = percents
         progressLabel.text = "\(Int(percents*100))%"
     }
     
+    /// Обновить вид прогресса
     override func layerWillDraw(_ layer: CALayer) {
-        percentsShow()
+        layoutRefresh()
     }
 }

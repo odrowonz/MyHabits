@@ -8,19 +8,19 @@
 import UIKit
 
 /// Класс для хранения данных о привычке.
-public final class Habit: Codable {
+final class Habit: Codable {
     
     /// Название привычки.
-    public var name: String
+    var name: String
     
     /// Время выполнения привычки.
-    public var date: Date
+    var date: Date
     
     /// Даты выполнения привычки.
-    public var trackDates: [Date]
+    var trackDates: [Date]
     
     /// Цвет привычки для выделения в списке.
-    public var color: UIColor {
+    var color: UIColor {
         get {
             return .init(red: r, green: g, blue: b, alpha: a)
         }
@@ -38,12 +38,12 @@ public final class Habit: Codable {
     }
     
     /// Описание времени выполнения привычки.
-    public var dateString: String {
+    var dateString: String {
         "Каждый день в " + dateFormatter.string(from: date)
     }
     
     /// Показывает, была ли сегодня добавлена привычка.
-    public var isAlreadyTakenToday: Bool {
+    var isAlreadyTakenToday: Bool {
         guard let lastTrackDate = trackDates.last else {
             return false
         }
@@ -59,12 +59,14 @@ public final class Habit: Codable {
         let formatter = DateFormatter()
         formatter.timeStyle = .short
         formatter.dateFormat = "HH:mm"
+        formatter.doesRelativeDateFormatting = false
+        formatter.locale = Locale(identifier: "ru")
         return formatter
     }()
     
     private lazy var calendar: Calendar = .current
     
-    public init(name: String, date: Date, trackDates: [Date] = [], color: UIColor) {
+    init(name: String, date: Date, trackDates: [Date] = [], color: UIColor) {
         self.name = name
         self.date = date
         self.trackDates = trackDates
@@ -82,7 +84,7 @@ public final class Habit: Codable {
 
 extension Habit: Equatable {
     
-    public static func == (lhs: Habit, rhs: Habit) -> Bool {
+    static func == (lhs: Habit, rhs: Habit) -> Bool {
         lhs.name == rhs.name &&
         lhs.date == rhs.date &&
         lhs.trackDates == rhs.trackDates &&
@@ -94,20 +96,20 @@ extension Habit: Equatable {
 }
 
 /// Класс для сохранения и изменения привычек пользователя.
-public final class HabitsStore {
+final class HabitsStore {
     
     /// Синглтон для изменения состояния привычек из разных модулей.
-    public static let shared: HabitsStore = .init()
+    static let shared: HabitsStore = .init()
     
     /// Список привычек, добавленных пользователем. Добавленные привычки сохраняются в UserDefaults и доступны после перезагрузки приложения.
-    public var habits: [Habit] = [] {
+    var habits: [Habit] = [] {
         didSet {
             save()
         }
     }
     
     /// Даты с момента установки приложения с разницей в один день.
-    public var dates: [Date] {
+    var dates: [Date] {
         guard let startDate = userDefaults.object(forKey: "start_date") as? Date else {
             return []
         }
@@ -116,7 +118,7 @@ public final class HabitsStore {
     
     /// Прогресс выполнения добавленных привычек. Привычка считается выполненной, если пользователь добавлял время больше 5 раз.
     /// Возвращает значение от 0 до 1.
-    public var todayProgress: Float {
+    var todayProgress: Float {
         guard habits.isEmpty == false else {
             return 0
         }
@@ -145,7 +147,7 @@ public final class HabitsStore {
     // MARK: - Lifecycle
     
     /// Сохраняет все изменения в привычках в UserDefaults.
-    public func save() {
+    func save() {
         do {
             let data = try encoder.encode(habits)
             userDefaults.setValue(data, forKey: "habits")
@@ -157,14 +159,14 @@ public final class HabitsStore {
     
     /// Добавляет текущую дату в trackDates для переданной привычки.
     /// - Parameter habit: Привычка, в которую добавится новая дата.
-    public func track(_ habit: Habit) {
+    func track(_ habit: Habit) {
         habit.trackDates.append(.init())
         save()
     }
     
     /// Возвращает отформатированное время для даты.
     /// - Parameter index: Индекс в массиве dates.
-    public func trackDateString(forIndex index: Int) -> String? {
+    func trackDateString(forIndex index: Int) -> String? {
         guard index < dates.count else {
             return nil
         }
@@ -176,7 +178,7 @@ public final class HabitsStore {
     ///   - habit: Привычка, у которой проверяются затреканные даты.
     ///   - date: Дата, для которой проверяется, была ли затрекана привычка.
     /// - Returns: Возвращает true, если привычка была затрекана в переданную дату.
-    public func habit(_ habit: Habit, isTrackedIn date: Date) -> Bool {
+    func habit(_ habit: Habit, isTrackedIn date: Date) -> Bool {
         habit.trackDates.contains { trackDate in
             guard let trackDateDay = calendar.dateComponents([.day], from: trackDate).day else {
                 return false

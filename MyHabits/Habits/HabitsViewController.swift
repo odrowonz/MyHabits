@@ -8,13 +8,7 @@
 
 import UIKit
 
-private let progressCellReuseIdentifier = "progressCollectionViewCell"
-private let habitCellReuseIdentifier = "habitCollectionViewCell"
-
-class HabitsViewController: UICollectionViewController {
-    
-    @IBOutlet var colView: UICollectionView!
-    
+final class HabitsViewController: UICollectionViewController {
     private var progressCell: ProgressCollectionViewCell?
 
     override func viewDidLoad() {
@@ -22,34 +16,34 @@ class HabitsViewController: UICollectionViewController {
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-        self.title = "Сегодня"
+        title = "Сегодня"
         
         // Register cell classes
         //colView.register(ProgressCollectionViewCell.self, forCellWithReuseIdentifier: progressCellReuseIdentifier)
 
         // Do any additional setup after loading the view.
-        colView.toAutoLayout()
-        colView.dataSource = self
-        colView.delegate = self
+        collectionView.toAutoLayout()
+        collectionView.dataSource = self
+        collectionView.delegate = self
     }
 
     // MARK: - Navigation
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "createHabitButtonPressed" {
-            let controller = segue.destination as! HabitViewController
-    
-            controller.state = .create
-            controller.colView = collectionView
+            if let controller = segue.destination as? HabitViewController {
+                controller.state = .create
+                controller.colView = collectionView
+            }
         }
-        else if segue.identifier == "showDates"
-        {
-            let controller = segue.destination as! HabitDetailsViewController
-            controller.habit = (sender as! HabitCollectionViewCell).habit
-            controller.colView = collectionView
+        else if segue.identifier == "showDates" {
+            if let controller = segue.destination as? HabitDetailsViewController,
+               let sender = sender as? HabitCollectionViewCell {
+                controller.habit = sender.habit
+                controller.colView = collectionView
+            }
         }
     }
-
 }
 
 // MARK: UICollectionViewDataSource
@@ -67,20 +61,22 @@ extension HabitsViewController {
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.section == 0 && indexPath.item == 0 {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: progressCellReuseIdentifier, for: indexPath) as! ProgressCollectionViewCell
-    
-            // Configure the cell
-            cell.percents = HabitsStore.shared.todayProgress
-            progressCell = cell
-            return cell
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProgressCollectionViewCell.id, for: indexPath) as? ProgressCollectionViewCell {
+                // Configure the cell
+                cell.percents = HabitsStore.shared.todayProgress
+                progressCell = cell
+                return cell
+            }
         } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: habitCellReuseIdentifier, for: indexPath) as! HabitCollectionViewCell
-    
-            // Configure the cell
-            cell.progressCell = self.progressCell
-            cell.habit = HabitsStore.shared.habits[indexPath.item - 1]
-            return cell
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HabitCollectionViewCell.id, for: indexPath) as? HabitCollectionViewCell {
+                // Configure the cell
+                cell.progressCell = self.progressCell
+                cell.habit = HabitsStore.shared.habits[indexPath.item - 1]
+                return cell
+            }
         }
+        // Недостижимо
+        return UICollectionViewCell()
     }
 
     // MARK: UICollectionViewDelegate

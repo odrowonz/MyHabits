@@ -9,57 +9,99 @@
 import UIKit
 
 /// Контроллер окна создания / редактирования привычки
-class HabitViewController: UIViewController {
-
-    @IBOutlet weak var navigItem: UINavigationItem!
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var contentView: UIView!
-    @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var colorView: UIView!
-    @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var timeDatePicker: UIDatePicker!
-    @IBOutlet weak var deleteHabitButton: UIButton!
+final class HabitViewController: UIViewController {
+    // Связь с элементами вида
+    @IBOutlet private var navigItem: UINavigationItem?
+    @IBOutlet private var scrollView: UIScrollView?
+    @IBOutlet private var contentView: UIView?
+    @IBOutlet private var nameTextField: UITextField?
+    @IBOutlet private var colorView: UIView?
+    @IBOutlet private var timeLabel: UILabel?
+    @IBOutlet private var timeDatePicker: UIDatePicker?
+    @IBOutlet private var deleteHabitButton: UIButton?
     
-    // набор предопределенных констант
-    private let defaultName: String? = ""
-    private let defaultColor: UIColor? = UIColor(named: "Color_161_22_204")
-    private let defaultHabitColor: UIColor? = UIColor(named: "Color_255_159_79")
-    public let currentTime: Date = Date()
+    // Набор предопределенных констант
+    private let defaultName: String = ""
+    private let defaultColor: UIColor = UIColor(named: "Color_161_22_204") ?? .blue
+    private let defaultHabitColor: UIColor = UIColor(named: "Color_255_159_79") ?? .orange
+    
+    private let colorPickerTitle: String = "Задайте цвет привычки"
+    private let alertControllerTitle: String = "Удалить привычку"
+    private let alertControllerMessage: String = "Вы хотите удалить привычку"
 
-    // текущий режим работы с привычкой (создание или редактирование)
-    public var state: State = .create
-    public var habit: Habit? = nil
-    public var colView: UICollectionView? = nil
-    public var navController: UINavigationController? = nil
-        
+    let currentTime: Date = Date()
+
+    // Текущий режим работы с привычкой (создание или редактирование)
+    var state: State? /*{
+        didSet {
+            // Начальные настройки в зависимости от режима
+            switch state {
+            case .create:
+                // В режиме создания написать заголовок Создать и спрятать кнопку удаления привычки
+                navigItem?.title = "Создать"
+                deleteHabitButton?.isEnabled = false
+                deleteHabitButton?.alpha = 0
+            default:
+                // В режиме редактирования написать заголовок Править и показать кнопку удаления привычки
+                navigItem?.title = "Править"
+                deleteHabitButton?.alpha = 1
+                deleteHabitButton?.isEnabled = true
+            }
+        }
+    }*/
+    
+    var habit : Habit? /*{
+        didSet {
+            // Обновить визуальные элементы в соответствии с привычкой
+            if let value = habit {
+                // Привычка задана
+                nameTextField?.text = value.name
+                colorView?.backgroundColor = value.color
+                timeDatePicker?.date = value.date
+            } else {
+                // Привычка не задана - взять значения по-умолчанию
+                nameTextField?.text = defaultName
+                colorView?.backgroundColor = defaultHabitColor
+                timeDatePicker?.date = Date()
+            }
+            
+            // Обновить текст времени
+            timeLabelRefresh()
+        }
+    }*/
+    
+    var colView: UICollectionView? = nil
+    var navController: UINavigationController? = nil
+    
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
         // Начальные значения для визуальных элементов
         if let habit = habit {
-            nameTextField.text = habit.name
-            colorView.backgroundColor = habit.color
-            timeDatePicker.date = habit.date
+            nameTextField?.text = habit.name
+            colorView?.backgroundColor = habit.color
+            timeDatePicker?.date = habit.date
         } else {
-            nameTextField.text = defaultName
-            colorView.backgroundColor = defaultColor
-            timeDatePicker.date = currentTime
+            nameTextField?.text = defaultName
+            colorView?.backgroundColor = defaultColor
+            timeDatePicker?.date = currentTime
         }
         // Обновить текст времени
-        timeLabel.setColorForPart(wholeText: timeDatePicker.date.timeToHabitString(), coloredPartText: timeDatePicker.date.timeToString(), colorOfPart: defaultColor!)
+        timeLabel?.setColorForPart(wholeText: timeDatePicker?.date.timeToHabitString(), coloredPartText: timeDatePicker?.date.timeToString(), colorOfPart: defaultColor)
         
         // Начальные настройки в зависимости от режима
         switch state {
         case .create:
             // В режиме создания написать заголовок Создать и спрятать кнопку удаления привычки
-            navigItem.title = "Создать"
-            deleteHabitButton.isEnabled = false
-            deleteHabitButton.alpha = 0
+            navigItem?.title = "Создать"
+            deleteHabitButton?.isEnabled = false
+            deleteHabitButton?.alpha = 0
         default:
             // В режиме редактирования написать заголовок Править и показать кнопку удаления привычки
-            navigItem.title = "Править"
-            deleteHabitButton.alpha = 1
-            deleteHabitButton.isEnabled = true
+            navigItem?.title = "Править"
+            deleteHabitButton?.alpha = 1
+            deleteHabitButton?.isEnabled = true
         }
 
         // Keyboard observers
@@ -68,11 +110,11 @@ class HabitViewController: UIViewController {
         
         // Нажатие на фон чтобы скрыть клавиатуру
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapBackground))
-        contentView.addGestureRecognizer(tapGesture)
+        contentView?.addGestureRecognizer(tapGesture)
         
         // Tap on color view for open  UIColorPickerViewController
         let tapColorGesture = UITapGestureRecognizer(target: self, action: #selector(tapColorAction))
-        colorView.addGestureRecognizer(tapColorGesture)
+        colorView?.addGestureRecognizer(tapColorGesture)
     }
     
     
@@ -91,14 +133,21 @@ class HabitViewController: UIViewController {
     
     // Обработчик нажатия Удалить привычку
     @IBAction func deleteHabitButtonTap(_ sender: UIButton) {
-        let alertController = UIAlertController(title: "Удалить привычку", message: "Вы хотите удалить привычку \(habit!.name)?", preferredStyle: .alert)
+        // Защита тела метода
+        // Привычка задана?
+        guard let habit = habit else { return }
+        // Привычка нашлась среди сохранённых?
+        guard let index = HabitsStore.shared.habits.firstIndex(of: habit) else { return }
+        
+        let alertController = UIAlertController(title: alertControllerTitle, message: "\(alertControllerMessage) \(habit.name)?", preferredStyle: .alert)
+        
+        // Создание кнопок
         let cancelAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
-        //let deleteAction = UIAlertAction(title: "Удалить", style: .destructive)
-        let deleteAction = UIAlertAction(title: "Удалить", style: .default) { [self] action in
+        let deleteAction = UIAlertAction(title: "Удалить", style: .default) {
+            // Обработчик удаления
+            [self] action in
             // Удалить привычку
-            if let index = HabitsStore.shared.habits.firstIndex(of: habit!) {
-                HabitsStore.shared.habits.remove(at: index)
-            }
+            HabitsStore.shared.habits.remove(at: index)
             // Перезагрузить коллекцию привычек
             colView!.reloadData()
             // Закрыть родительское окно
@@ -106,37 +155,54 @@ class HabitViewController: UIViewController {
             // Закрыть текущее окно
             self.dismiss(animated: true, completion: nil)
         }
-            
+        
+        // Добавление кнопок к алерт-контроллеру
         alertController.addAction(cancelAction)
         alertController.addAction(deleteAction)
+        
+        // Модальный показ
         self.present(alertController, animated: true, completion: nil)
     }
     
     // Обработчик нажатия Сохранить / Править
     @IBAction func saveButton(_ sender: UIBarButtonItem) {
+        // Защита тела метода
+        // Режим задан?
+        guard let state = state else { return }
+        // Наименование привычки задано?
+        guard let name = nameTextField?.text else { return }
+        if name == "" { return }
+        // Цвет привычки определен?
+        guard let color = colorView?.backgroundColor else { return }
+        // Время привычки задано?
+        guard let date = timeDatePicker?.date else { return }
+        
         switch state {
         case .create:
             // В режиме создания создать новую привычку,
             // обновить коллекцию привычек и
             // закрыть текущее модальное окно
-            habit = Habit(name: nameTextField.text!,
-                          date: timeDatePicker.date,
-                          color: colorView.backgroundColor!)
-            
+            habit = Habit(name: name, date: date, color: color)
             HabitsStore.shared.habits.append(habit!)
-        default:
+        case .edit:
+            // Защита тела метода (нужна только при редактировании привычки)
+            // Задана ли привычка?
+            guard let habit = habit else { return }
+            
             // В режиме редактирования исправить текущую привычку,
             // обновить коллекцию привычек и
             // закрыть текущее модальное окно
-            habit!.name = nameTextField.text!
-            habit!.date = timeDatePicker.date
-            habit!.color = colorView.backgroundColor!
-            
+            habit.name = name
+            habit.date = date
+            habit.color = color
             HabitsStore.shared.save()
+            
+            // Закрыть родительское окно
+            navController!.popViewController(animated: true)
         }
         
         // Перезагрузить коллекцию привычек
-        colView!.reloadData()
+        colView?.reloadData()
         
         // Закрыть текущее окно
         self.dismiss(animated: true, completion: nil)
@@ -145,24 +211,28 @@ class HabitViewController: UIViewController {
     // Обработчик исправления DatePicker
     @IBAction func timeDatePickerChanged(_ sender: Any) {
         // Обновить текст времени
-        timeLabel.setColorForPart(wholeText: timeDatePicker.date.timeToHabitString(), coloredPartText: timeDatePicker.date.timeToString(), colorOfPart: defaultColor!)
+        timeLabelRefresh()
     }
     
-    
+    /// Обновить текст времени
+    private func timeLabelRefresh() {
+        if let date = timeDatePicker?.date {
+            timeLabel?.setColorForPart(wholeText: date.timeToHabitString(), coloredPartText: date.timeToString(), colorOfPart: defaultColor)
+        }
+    }
     
     // MARK: Keyboard actions
     @objc private func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-
             let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height + view.safeAreaInsets.bottom, right: 0)
-            scrollView.contentInset = contentInsets
-            scrollView.verticalScrollIndicatorInsets = contentInsets
-            }
+            scrollView?.contentInset = contentInsets
+            scrollView?.verticalScrollIndicatorInsets = contentInsets
+        }
     }
     
     @objc private func keyboardWillHide(notification: NSNotification) {
-        scrollView.contentInset = .zero
-        scrollView.verticalScrollIndicatorInsets = .zero
+        scrollView?.contentInset = .zero
+        scrollView?.verticalScrollIndicatorInsets = .zero
     }
     
     // MARK: Actions
@@ -176,25 +246,25 @@ class HabitViewController: UIViewController {
     }
     
     // Спрятать клавиатуру
-    func hideKeyboard() {
+    private func hideKeyboard() {
         view.endEditing(true)
     }
     
     // Подготовить и показать UIColorPickerViewController
-    func showUIColorPickerViewController() {
+    private func showUIColorPickerViewController() {
         let colorPicker = UIColorPickerViewController()
         colorPicker.delegate = self
-        colorPicker.selectedColor = colorView.backgroundColor!
-        colorPicker.title = "Задайте цвет привычки"
+        colorPicker.selectedColor = colorView?.backgroundColor ?? defaultColor
+        colorPicker.title = colorPickerTitle
         present(colorPicker, animated: true, completion: nil)
     }
 }
 
 extension HabitViewController: UIColorPickerViewControllerDelegate {
     func colorPickerViewControllerDidSelectColor(_ viewController: UIColorPickerViewController) {
-        // Присвоить цвет викуальному элементу
+        // Присвоить цвет визуальному элементу
         // после выбора в UIColorPickerViewController
-        colorView.backgroundColor = viewController.selectedColor
+        colorView?.backgroundColor = viewController.selectedColor
     }
 }
 

@@ -8,11 +8,12 @@
 
 import UIKit
 
-class HabitDetailsViewController: UITableViewController {
+final class HabitDetailsViewController: UITableViewController {
 
-    let reuseIdentifier = "HabitDetailsTableViewCell"
-    public var habit: Habit? = nil
-    public var colView: UICollectionView? = nil
+    /// Привычка
+    var habit: Habit?
+    
+    var colView: UICollectionView? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,12 +33,17 @@ class HabitDetailsViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! HabitDetailsTableViewCell
-        let maxI = HabitsStore.shared.dates.count - 1
-        cell.dateLabel.text = HabitsStore.shared.trackDateString(forIndex: maxI-indexPath.row)
-        //cell.dateLabel.text = HabitsStore.shared.dates[maxI-indexPath.row].dateToString()
-        cell.accessoryType = HabitsStore.shared.habit(habit!, isTrackedIn: HabitsStore.shared.dates[indexPath.row]) ? .checkmark : .none
-        return cell
+        if let cell = tableView.dequeueReusableCell(withIdentifier: HabitDetailsTableViewCell.id, for: indexPath) as? HabitDetailsTableViewCell {
+            // Сортировка дат от сегодня в прошлое
+            let maxI = HabitsStore.shared.dates.count - 1
+            cell.date = HabitsStore.shared.dates[maxI-indexPath.row]
+            // Привычка для выставления галочки (или невыставления)
+            cell.habit = habit
+            return cell
+        }
+        
+        // Недостижимо
+        return UITableViewCell()
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -48,12 +54,12 @@ class HabitDetailsViewController: UITableViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "editHabitButtonPressed" {
-            let controller = segue.destination as! HabitViewController
-    
-            controller.state = .edit
-            controller.habit = habit
-            controller.colView = colView
-            controller.navController = self.navigationController
+            if let controller = segue.destination as? HabitViewController {
+                controller.state = .edit
+                controller.habit = habit
+                controller.colView = colView
+                controller.navController = self.navigationController
+            }
         }
     }
 }

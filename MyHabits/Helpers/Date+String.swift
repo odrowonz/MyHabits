@@ -9,15 +9,18 @@ import UIKit
 
 extension Date {
     /// Текстовое представление даты
-    public func dateToString() -> String {
+    func dateToString() -> String {
         let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .none
+        dateFormatter.doesRelativeDateFormatting = true
         dateFormatter.locale = Locale(identifier: "ru")
-        dateFormatter.dateFormat = "dd MMMM yyyy"
+        //dateFormatter.dateFormat = "dd MMMM yyyy"
         return dateFormatter.string(from: self)
     }
     
     /// Текстовое представление времени.
-    public func timeToString() -> String {
+    func timeToString() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.timeStyle = .short
         dateFormatter.dateFormat = "HH:mm"
@@ -25,7 +28,7 @@ extension Date {
     }
     
     /// Описание времени выполнения привычки.
-    public func timeToHabitString() -> String {
+    func timeToHabitString() -> String {
         "Каждый день в " + timeToString()
     }
 }
