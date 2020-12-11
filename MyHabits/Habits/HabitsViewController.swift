@@ -19,9 +19,6 @@ final class HabitsViewController: UICollectionViewController {
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         title = "Сегодня"
-        
-        // Register cell classes
-        //colView.register(ProgressCollectionViewCell.self, forCellWithReuseIdentifier: progressCellReuseIdentifier)
 
         // Do any additional setup after loading the view.
         collectionView.toAutoLayout()
@@ -35,15 +32,12 @@ final class HabitsViewController: UICollectionViewController {
         if segue.identifier == "createHabitButtonPressed" {
             if let controller = segue.destination as? HabitViewController {
                 controller.state = .create
-                controller.navController = navigationController
-                //controller.colView = collectionView
             }
         }
         else if segue.identifier == "showDates" {
             if let controller = segue.destination as? HabitDetailsViewController,
                let sender = sender as? HabitCollectionViewCell {
                 controller.habit = sender.habit
-                //controller.colView = collectionView
             }
         }
     }

@@ -10,7 +10,7 @@
         <!--Выпить стакан воды-->
         <scene sceneID="hXJ-pO-X5i">
             <objects>
-                <tableViewController id="b1L-N8-TbI" customClass="HabitDetailsViewController" customModule="MyHabits" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="HabitDetails" id="b1L-N8-TbI" customClass="HabitDetailsViewController" customModule="MyHabits" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="8a9-fj-uwk">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -55,7 +55,7 @@
                                     <color key="titleColor" name="Color_161_22_204"/>
                                 </state>
                                 <connections>
-                                    <segue destination="SEt-U0-Yr8" kind="presentation" identifier="editHabitButtonPressed" id="JD1-uu-4wI"/>
+                                    <segue destination="SEt-U0-Yr8" kind="presentation" identifier="editHabitButtonPressed" id="BGd-RP-kVO"/>
                                 </connections>
                             </button>
                             <color key="tintColor" name="Color_161_22_204"/>
@@ -66,10 +66,10 @@
             </objects>
             <point key="canvasLocation" x="1248" y="-704"/>
         </scene>
-        <!--UIViewController-j5I-Cj-VUZ-->
+        <!--Habit-->
         <scene sceneID="Bd7-SQ-w3v">
             <objects>
-                <viewControllerPlaceholder storyboardName="HabitsTab" referencedIdentifier="UIViewController-j5I-Cj-VUZ" id="SEt-U0-Yr8" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Habit" id="SEt-U0-Yr8" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UDR-Ic-MKr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1917" y="-704"/>

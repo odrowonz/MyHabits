@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="j5I-Cj-VUZ">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
@@ -12,7 +12,7 @@
         <!--Habit View Controller-->
         <scene sceneID="HvR-aL-hdz">
             <objects>
-                <viewController storyboardIdentifier="UIViewController-j5I-Cj-VUZ" id="j5I-Cj-VUZ" customClass="HabitViewController" customModule="MyHabits" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Habit" useStoryboardIdentifierAsRestorationIdentifier="YES" id="j5I-Cj-VUZ" customClass="HabitViewController" customModule="MyHabits" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" id="eUU-ET-HLj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

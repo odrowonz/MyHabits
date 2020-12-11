@@ -24,8 +24,8 @@
                                     <constraint firstAttribute="height" constant="120" id="hy0-d7-qXn"/>
                                 </constraints>
                             </imageView>
-                            <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MyHabits" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EPq-Nv-H7P">
-                                <rect key="frame" x="169" y="799.5" width="76" height="20.5"/>
+                            <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Мои привычки" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EPq-Nv-H7P">
+                                <rect key="frame" x="146" y="799.5" width="122.5" height="20.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <color key="textColor" name="Color_98_54_255"/>
                                 <nil key="highlightedColor"/>

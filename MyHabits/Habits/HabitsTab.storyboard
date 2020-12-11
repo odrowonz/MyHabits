@@ -200,17 +200,17 @@
         <!--HabitDetails-->
         <scene sceneID="OT0-w3-xEc">
             <objects>
-                <viewControllerPlaceholder storyboardName="HabitDetails" id="bno-Ta-Q7O" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="HabitDetails" referencedIdentifier="HabitDetails" id="bno-Ta-Q7O" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="Qj5-bg-q5E"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SW0-Bb-oqd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1212" y="-916"/>
         </scene>
-        <!--UIViewController-j5I-Cj-VUZ-->
+        <!--Habit-->
         <scene sceneID="yNe-Ew-tzs">
             <objects>
-                <viewControllerPlaceholder storyboardIdentifier="UIViewController-j5I-Cj-VUZ" storyboardName="Habit" referencedIdentifier="UIViewController-j5I-Cj-VUZ" id="Xwj-ka-Xw4" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardIdentifier="UIViewController-j5I-Cj-VUZ" storyboardName="Habit" id="Xwj-ka-Xw4" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IlD-0w-Y0C" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1241" y="-1270"/>
