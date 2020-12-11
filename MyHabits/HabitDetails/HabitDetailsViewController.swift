@@ -55,6 +55,19 @@ final class HabitDetailsViewController: UITableViewController {
             if let controller = segue.destination as? HabitViewController {
                 controller.state = .edit
                 controller.habit = habit
+                controller.submitFinalAction = {
+                    if let nav = self.navigationController,
+                       let root = nav.viewControllers[0] as? HabitsViewController {
+                        // Перезагрузть коллекцию
+                        root.isUpdateNeeded = !root.isUpdateNeeded
+                        // Перейти на корневой контроллер
+                        nav.popToRootViewController(animated: true)
+                    }
+                }
+                controller.cancelFinalAction = {
+                    // Перейти на корневой контроллер
+                    self.navigationController?.popToRootViewController(animated: true)
+                }
             }
         }
     }

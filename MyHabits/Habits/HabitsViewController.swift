@@ -32,6 +32,10 @@ final class HabitsViewController: UICollectionViewController {
         if segue.identifier == "createHabitButtonPressed" {
             if let controller = segue.destination as? HabitViewController {
                 controller.state = .create
+                controller.submitFinalAction = {
+                    self.collectionView.reloadData()
+                }
+                controller.cancelFinalAction = nil
             }
         }
         else if segue.identifier == "showDates" {
