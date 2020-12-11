@@ -32,6 +32,7 @@ final class ProgressCollectionViewCell: UICollectionViewCell {
     }
     
     override func layerWillDraw(_ layer: CALayer) {
+        super.layerWillDraw(layer)
         progressRefresh?()
     }
 }

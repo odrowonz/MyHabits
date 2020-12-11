@@ -71,6 +71,7 @@ extension HabitsViewController {
                 self.progressRefresh = {
                     cell.layoutRefresh(HabitsStore.shared.todayProgress)
                 }
+                self.progressRefresh?()
                 return cell
             }
         } else {
