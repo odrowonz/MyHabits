@@ -18,8 +18,8 @@ class HabitCollectionViewCell: UICollectionViewCell {
     /// Идентификатор ячейки
     static let id = "habitCollectionViewCell"
     
-    /// Ячейка с прогрессом
-    var progressCell: ProgressCollectionViewCell?
+    /// Что нужно сделать, если успешное действие
+    var submitFinalAction: (()->Void)?
     
     /// Привычка
     var habit: Habit? {
@@ -57,8 +57,6 @@ class HabitCollectionViewCell: UICollectionViewCell {
         guard let habit = habit else { return }
         // Кнопка выполнения привычки задана?
         guard let didItButton = didItButton else { return }
-        // Ячейка с прогрессом задана?
-        guard let progressCell = progressCell else { return }
         
         // Если привычка еще не выполнялась сегодня
         if !habit.isAlreadyTakenToday {
@@ -66,8 +64,8 @@ class HabitCollectionViewCell: UICollectionViewCell {
             didItButton.isSelected = !didItButton.isSelected
             // Также нужно сохранить время привычки
             HabitsStore.shared.track(habit)
-            // Обновить прогресс
-            progressCell.percents = HabitsStore.shared.todayProgress
+            // Действие в конце
+            submitFinalAction?()
         }
     }
 }

@@ -60,6 +60,8 @@ final class HabitDetailsViewController: UITableViewController {
                        let root = nav.viewControllers[0] as? HabitsViewController {
                         // Перезагрузть коллекцию
                         root.isUpdateNeeded = !root.isUpdateNeeded
+                        // Обновить прогресс
+                        root.progressRefresh?()
                         // Перейти на корневой контроллер
                         nav.popToRootViewController(animated: true)
                     }

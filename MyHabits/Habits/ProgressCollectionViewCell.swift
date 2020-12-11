@@ -16,15 +16,11 @@ final class ProgressCollectionViewCell: UICollectionViewCell {
     /// Идентификатор ячейки
     static let id = "progressCollectionViewCell"
     
-    /// Доля выполненных привычек (от 0 до 1)
-    var percents: Float = HabitsStore.shared.todayProgress {
-        didSet(value) {
-            layoutRefresh()
-        }
-    }
+    // Вызывает обновление прогресса
+    var progressRefresh: (() -> Void)?
     
     /// Метод обновления ячейки
-    private func layoutRefresh() {
+    func layoutRefresh(_ percents: Float) {
         // Защита тела метода
         // Вид прогресса задан?
         guard let progressView = progressView else { return }
@@ -35,8 +31,7 @@ final class ProgressCollectionViewCell: UICollectionViewCell {
         progressLabel.text = "\(Int(percents*100))%"
     }
     
-    /// Обновить вид прогресса
     override func layerWillDraw(_ layer: CALayer) {
-        layoutRefresh()
+        progressRefresh?()
     }
 }

@@ -9,10 +9,13 @@
 import UIKit
 
 final class HabitsViewController: UICollectionViewController {
-    private var progressCell: ProgressCollectionViewCell?
     
+    // Вызывает обновление коллекции
     var isUpdateNeeded: Bool = false { didSet { collectionView.reloadData() } }
-
+    
+    // Вызывает обновление прогресса
+    var progressRefresh: (() -> Void)?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -34,6 +37,7 @@ final class HabitsViewController: UICollectionViewController {
                 controller.state = .create
                 controller.submitFinalAction = {
                     self.collectionView.reloadData()
+                    self.progressRefresh?()
                 }
                 controller.cancelFinalAction = nil
             }
@@ -64,14 +68,15 @@ extension HabitsViewController {
         if indexPath.section == 0 && indexPath.item == 0 {
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProgressCollectionViewCell.id, for: indexPath) as? ProgressCollectionViewCell {
                 // Configure the cell
-                cell.percents = HabitsStore.shared.todayProgress
-                progressCell = cell
+                self.progressRefresh = {
+                    cell.layoutRefresh(HabitsStore.shared.todayProgress)
+                }
                 return cell
             }
         } else {
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HabitCollectionViewCell.id, for: indexPath) as? HabitCollectionViewCell {
                 // Configure the cell
-                cell.progressCell = self.progressCell
+                cell.submitFinalAction = self.progressRefresh
                 cell.habit = HabitsStore.shared.habits[indexPath.item - 1]
                 return cell
             }
