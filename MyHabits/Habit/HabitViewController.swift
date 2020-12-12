@@ -96,20 +96,11 @@ final class HabitViewController: UIViewController {
     
     // Обработчик нажатия Отменить
     @IBAction func closeButton(_ sender: UIBarButtonItem) {
-        // Защита тела метода
-        // Получить таббар удаётся?
-        //guard let tab = presentingViewController as? UITabBarController else { return }
-        // Получить навигатор удаётся?
-        //guard let nav = tab.selectedViewController as? UINavigationController else { return }
-
         // Закрыть текущее окно
         self.dismiss(animated: true, completion: nil)
         
         // Финальное действие
         self.cancelFinalAction?()
-
-        // Закрыть родительское окно
-        //nav.popToRootViewController(animated: true)
     }
     
     // Обработчик нажатия Удалить привычку
@@ -119,13 +110,6 @@ final class HabitViewController: UIViewController {
         guard let habit = habit else { return }
         // Привычка нашлась среди сохранённых?
         guard let index = HabitsStore.shared.habits.firstIndex(of: habit) else { return }
-        // Получить таббар удаётся?
-        //guard let tab = presentingViewController as? UITabBarController else { return }
-        // Получить навигатор удаётся?
-        //guard let nav = tab.selectedViewController as? UINavigationController else { return }
-        // Получить корневой контроллер удаётся?
-        //guard let root = nav.viewControllers[0] as? HabitsViewController else { return }
-        
 
         let alertController = UIAlertController(title: alertControllerTitle, message: "\(alertControllerMessage) \(habit.name)?", preferredStyle: .alert)
         
@@ -136,18 +120,10 @@ final class HabitViewController: UIViewController {
             [] action in
             // Удалить привычку
             HabitsStore.shared.habits.remove(at: index)
-            
-            // Перезагрузить коллекцию привычек
-            //root.isUpdateNeeded = true
-
             // Закрыть текущее окно
             self.dismiss(animated: true, completion: nil)
-            
             // Финальное действие
             self.submitFinalAction?()
-            
-            // Закрыть родительское окно
-            //nav.popToRootViewController(animated: true)
         }
         
         // Добавление кнопок к алерт-контроллеру
@@ -170,12 +146,6 @@ final class HabitViewController: UIViewController {
         guard let color = colorView?.backgroundColor else { return }
         // Время привычки задано?
         guard let date = timeDatePicker?.date else { return }
-        // Получить таббар удаётся?
-        //guard let tab = presentingViewController as? UITabBarController else { return }
-        // Получить навигатор удаётся?
-        //guard let nav = tab.selectedViewController as? UINavigationController else { return }
-        // Получить корневой контроллер удаётся?
-        //guard let root = nav.viewControllers[0] as? HabitsViewController else { return }
         
         switch state {
         case .create:
@@ -198,17 +168,11 @@ final class HabitViewController: UIViewController {
             HabitsStore.shared.save()
         }
         
-        // Перезагрузить коллекцию привычек
-        //root.isUpdateNeeded = true
-        
         // Закрыть текущее окно
         self.dismiss(animated: true, completion: nil)
         
         // Финальное действие
         self.submitFinalAction?()
-        
-        // Закрыть родительское окно
-        //nav.popToRootViewController(animated: true)
     }
     
     // Обработчик исправления DatePicker

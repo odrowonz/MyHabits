@@ -12,10 +12,6 @@ final class HabitDetailsViewController: UITableViewController {
 
     /// Привычка
     var habit: Habit?
-        
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
 
     // MARK: - Table view data source
 
@@ -57,6 +53,7 @@ final class HabitDetailsViewController: UITableViewController {
                 controller.habit = habit
                 controller.submitFinalAction = {
                     if let nav = self.navigationController,
+                       nav.viewControllers.count > 0,
                        let root = nav.viewControllers[0] as? HabitsViewController {
                         // Перезагрузть коллекцию
                         root.isUpdateNeeded = !root.isUpdateNeeded
